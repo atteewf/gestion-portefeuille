@@ -1,90 +1,171 @@
-# 🗂️ DossierFlow
+# 📂⚡ Gestion de Portefeuille - Portfolio Management
 
-**Application de gestion de dossiers avec suivi temporel et système d'alertes visuelles**
+## Preview
 
-## 📋 Concept
+**Coordinator View**
+![alt text](image-4.png)
 
-Application développée pour illustrer un workflow collaboratif inspiré d'un besoin réel rencontré dans la fonction publique : la gestion de dossiers avec deadlines critiques, assignation de tâches et suivi d'avancement.
+**Contributor View - Team Statistics**
+![alt text](image-3.png)
 
-## ✨ Fonctionnalités
+Vu avec plusieurs dossier en cours et un finit cote cordinateur ![alt text](image-5.png)
+Meme vu cote copntributeurs ![alt text](image-6.png)
+_[À ajouter : screenshots de ton app - je te montre comment faire après]_
 
-### 🚦 Système d'alerte visuel (feu tricolore)
-- **Vert** : > 50% du temps restant
-- **Orange** : 20-50% du temps restant  
-- **Rouge** : < 20% du temps restant
-- **Gris** : Échéance dépassée
+## Description
 
-### 👔 Mode Coordinateur
-- Création de nouveaux dossiers
-- Définition des échéances (en heures)
-- Assignation à une équipe
-- Actions prédéfinies à effectuer
+A full-featured **Portfolio Management App** built with **React + Vite**, demonstrating:
 
-### 👨‍💼 Mode Contributeur
-- Consultation des dossiers assignés
-- Validation des actions effectuées
-- Suivi de la progression
+- Complex state management with **useReducer + Context API**
+- Real-time urgency calculation with **traffic light system** 🚦
+- Dynamic timers updating every minute
+- Workflow management with **daily recurring tasks**
+- Role-based views (**Coordinator** / **Contributor**)
+- Team statistics and progress tracking
 
-### 📊 Suivi en temps réel
-- Temps restant affiché (heures + minutes)
-- Barre de progression des actions
-- Statut visuel (À traiter / En cours / Terminé)
+This project transposes a real-world need from public administration into a generic portfolio tracking tool, showing practical React skills across state management, business logic, and component architecture.
 
-## 🛠️ Stack technique
-
-- **React 19** avec hooks
-- **useReducer** pour la gestion d'état complexe
-- **Context API** pour la distribution de l'état
-- **CSS pur** (pas de bibliothèque UI)
-
-## 📚 Points d'apprentissage démontrés
-
-### 1. useReducer avancé
-```javascript
-function dossierReducer(state, action) {
-  switch (action.type) {
-    case "ADD_DOSSIER":
-      // Logique de création
-    case "TOGGLE_ACTION":
-      // Calcul auto du statut
-    case "UPDATE_ASSIGNMENT":
-      // Mise à jour
-  }
-}
-```
-
-### 2. Calculs dérivés
-- Urgence calculée automatiquement en fonction du temps restant
-- Statut déduit des actions cochées
-- Tri intelligent par priorité
-
-### 3. Architecture composants
-- Séparation claire : Context / Composants / Logique
-- useCallback pour optimisation
-- Props drilling évité grâce au Context
-
-## 🎯 Cas d'usage métier
-
-L'application transpose un besoin réel :
-- **Contexte** : Traitement de dossiers avec contraintes temporelles fortes
-- **Problème** : Risque de dépassement de délais, manque de visibilité
-- **Solution** : Alertes visuelles + suivi d'actions + assignation claire
-
-## 🚀 Installation
-
-```bash
-npm install
-npm start
-```
-
-## 📝 Évolutions possibles
-
-- [ ] Filtres par statut/urgence
-- [ ] Notifications avant échéance
-- [ ] Export PDF des dossiers
-- [ ] Historique des actions
-- [ ] Authentification multi-utilisateurs
+🔗 **[Live Demo](https://gestion-portefeuille-teal.vercel.app/)**
 
 ---
 
-**Développé par Seb Ollivier** - [Portfolio](https://seb-ollivier.dev) | [GitHub](https://github.com/atteewf)
+## Features
+
+- **Traffic light urgency system**: Visual alerts (🟢 green / 🟠 orange / 🔴 red / ⚫ expired) based on remaining time
+- **4 file types**: Express (24h), Standard (48h), Extended (96h), Exceptional (144h)
+- **Daily task cycles**: Urgency resets every 24h for multi-day files
+- **Coordinator mode**: Create files, assign to teams, track progress
+- **Contributor mode**: Team statistics, progress bars, active file lists
+- **Real-time countdown**: Hours and minutes updated automatically
+- **Auto status calculation**: Pending → In Progress → Completed based on checked actions
+
+---
+
+## Tech Stack
+
+- React 19
+- Vite 8.0
+- Hooks: `useState`, `useEffect`, `useContext`, `useReducer`, `useCallback`
+- Context API for global state
+- Plain CSS with Navy/Blue marine theme
+- Deployed on Vercel
+
+---
+
+## Folder Structure
+
+```
+src/
+├── components/
+│   ├── DossierForm.jsx         # File creation form
+│   ├── DossierCard.jsx         # Card with traffic light + timer
+│   ├── DossierList.jsx         # List sorted by urgency
+│   └── GestionEquipe.jsx       # Team statistics view
+├── context/
+│   └── DossierContext.jsx      # Context + useReducer logic
+├── styles/
+│   └── App.css
+└── App.jsx
+```
+
+---
+
+## How to Run
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/atteewf/gestion-portefeuille.git
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Start the development server:
+
+```bash
+npm run dev
+```
+
+Open http://localhost:5173 in your browser.
+
+---
+
+## Business Logic
+
+The application implements several business rules:
+
+**File status** is calculated automatically:
+
+- **Pending**: No actions completed
+- **In Progress**: At least one action completed
+- **Completed**: All actions completed
+
+**Urgency level** is calculated based on remaining time in the current day:
+
+- 🟢 **Green**: > 50% of time left
+- 🟠 **Orange**: 20–50% of time left
+- 🔴 **Red**: < 20% of time left
+- ⚫ **Expired**: Deadline passed
+
+**Files are sorted automatically** by urgency (red first) and deadline.
+
+---
+
+## Architecture Decisions
+
+### Why useReducer?
+
+Initially built with `useState`, the app grew to include:
+
+- Multiple action types (add file, toggle action, update assignment, delete)
+- Automatic status calculation based on checked actions
+- Complex state with nested objects (files → actions)
+
+**useReducer centralizes all business logic** in one place, making the code more maintainable and testable.
+
+### Why daily cycles?
+
+In the original use case (public administration), certain legal procedures require **daily repetition of actions** (e.g., rights notification, supervisor contact). The traffic light resets every 24h to reflect this workflow.
+
+---
+
+## Project Origin
+
+This project was inspired by my experience in public administration, where I managed files with **strict legal deadlines**. The challenge: no visual alert system to prevent deadline overruns.
+
+I transposed this need into a generic portfolio management tool, demonstrating my ability to:
+
+- Analyze a real business problem
+- Design a technical solution
+- Implement complex React patterns
+
+---
+
+## Future Improvements
+
+- [ ] Push notifications before deadlines
+- [ ] Data persistence (LocalStorage or backend API)
+- [ ] Advanced filters (status, team, urgency)
+- [ ] PDF export for reports
+- [ ] Dashboard with charts (deadline compliance rate)
+- [ ] Dark mode
+
+---
+
+## Author
+
+**Seb Ollivier** – Frontend Developer in Career Transition
+
+Portfolio: [seb-ollivier.dev](https://seb-ollivier.dev)  
+GitHub: [@atteewf](https://github.com/atteewf)
+
+---
+
+## Contact
+
+LinkedIn: https://www.linkedin.com/in/seb-o-0188133a4/  
+Email: ateeew@gmail.com
