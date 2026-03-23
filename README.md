@@ -3,14 +3,11 @@
 ## Preview
 
 **Coordinator View**
-![alt text](image-4.png)
+
+![alt text](image1-CoordinatorView.jpeg)
 
 **Contributor View - Team Statistics**
-![alt text](image-3.png)
-
-Vu avec plusieurs dossier en cours et un finit cote cordinateur ![alt text](image-5.png)
-Meme vu cote copntributeurs ![alt text](image-6.png)
-_[À ajouter : screenshots de ton app - je te montre comment faire après]_
+![alt text](image2-ContributorView-TeamStatistics.jpeg)
 
 ## Description
 
@@ -160,7 +157,6 @@ I transposed this need into a generic portfolio management tool, demonstrating m
 
 **Seb Ollivier** – Frontend Developer in Career Transition
 
-Portfolio: [seb-ollivier.dev](https://seb-ollivier.dev)  
 GitHub: [@atteewf](https://github.com/atteewf)
 
 ---
