@@ -7,6 +7,7 @@
 ![alt text](image1-CoordinatorView.jpeg)
 
 **Contributor View - Team Statistics**
+
 ![alt text](image2-ContributorView-TeamStatistics.jpeg)
 
 ## Description
